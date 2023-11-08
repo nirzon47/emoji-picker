@@ -41,7 +41,7 @@ themeToggle.addEventListener('click', () => {
 })
 
 // Functions
-const renderRows = (query = '', category = 'All') => {
+const renderRows = (query = '', category = 'Smileys & Emotion') => {
 	const fragment = document.createDocumentFragment()
 
 	emojiList.forEach((emoji) => {
