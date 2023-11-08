@@ -9,14 +9,20 @@
 		<link rel="stylesheet" href="styles/output.css" />
 
 		<!-- Script -->
+		<script src="model copy.js"></script>
 		<script src="script.js" defer></script>
-		<script src="model.js" defer></script>
+
+		<!-- Fontawesome -->
+		<script
+			src="https://kit.fontawesome.com/d521bbec8a.js"
+			crossorigin="anonymous"
+		></script>
 	</head>
-	<body class="min-h-screen w-screen p-8">
+	<body class="w-screen min-h-screen p-8 overflow-x-hidden">
 		<!-- Header -->
-		<header class="flex justify-between items-center mb-8">
+		<header class="flex items-center justify-between mb-8">
 			<!-- Heading -->
-			<h1 class="font-bold text-2xl">Emoji Picker 😉</h1>
+			<h1 class="text-2xl font-bold">Emoji Picker 😉</h1>
 
 			<!-- Theme swap -->
 			<label class="swap swap-rotate">
@@ -25,7 +31,7 @@
 
 				<!-- sun icon -->
 				<svg
-					class="swap-on fill-current w-8 h-8"
+					class="w-8 h-8 fill-current swap-on"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 				>
@@ -36,7 +42,7 @@
 
 				<!-- moon icon -->
 				<svg
-					class="swap-off fill-current w-8 h-8"
+					class="w-8 h-8 fill-current swap-off"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 24 24"
 				>
@@ -48,16 +54,37 @@
 		</header>
 
 		<main>
+			<section class="flex mb-8 gap-x-8">
+				<input
+					type="text"
+					placeholder="Search your emoji here"
+					class="w-full input input-bordered"
+				/>
+				<select class="w-full max-w-xs select select-bordered">
+					<option selected>All</option>
+					<option>Smileys & Emotion</option>
+					<option>People & Body</option>
+					<option>Animals & Nature</option>
+					<option>Food & Drink</option>
+					<option>Travel & Places</option>
+					<option>Activities</option>
+					<option>Objects</option>
+					<option>Symbols</option>
+					<option>Flags</option>
+				</select>
+			</section>
 			<table class="table">
 				<thead class="text-base">
 					<tr>
-						<th>Emoji</th>
+						<th>Name</th>
 						<th>Aliases</th>
 						<th>Description</th>
 					</tr>
 				</thead>
-				<tbody class="text-xl"></tbody>
+				<tbody class="text-xl" id="tbody"></tbody>
 			</table>
 		</main>
+		<div class="hidden w-12 capitalize btn btn-primary btn-sm"></div>
+		<div class="inline-block"></div>
 	</body>
 </html>
