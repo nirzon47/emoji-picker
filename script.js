@@ -5,51 +5,46 @@ const category = document.getElementById('category')
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-	renderAll()
+	renderRows()
 })
 
 input.addEventListener('input', (e) => {
-	renderSearch(e.target.value)
+	renderRows(e.target.value, category.value)
+})
+
+category.addEventListener('change', (e) => {
+	renderRows(input.value, e.target.value)
 })
 
 // Functions
-const renderAll = () => {
-	emojiList.forEach((emoji) => {
-		const alias = getAlias(emoji)
-		const description = getDescription(emoji)
-
-		tbody.innerHTML += `
-        <tr>
-            <td><span class="w-12 inline-block">${emoji.emoji}</span> <button class="btn btn-primary btn-sm"><i class="fa-solid fa-clipboard"></i></button></td>
-            <td class="capitalize">${alias}</td>
-            <td>${description}</td>
-        </tr>
-    `
-	})
-}
-
-const renderSearch = (query) => {
-	tbody.innerHTML = ''
-	query = query.toLowerCase()
+const renderRows = (query = '', category = 'All') => {
+	const fragment = document.createDocumentFragment()
 
 	emojiList.forEach((emoji) => {
 		const alias = getAlias(emoji)
-
 		const description = getDescription(emoji)
+		query = query.toLowerCase()
+
+		if (category !== 'All' && category !== emoji.category) {
+			return
+		}
 
 		if (
 			alias.toLowerCase().includes(query) ||
 			description.toLowerCase().includes(query)
 		) {
-			tbody.innerHTML += `
-            <tr>
-                <td><span class="w-12 inline-block">${emoji.emoji}</span> <button class="btn btn-primary btn-sm"><i class="fa-solid fa-clipboard"></i></button></td>
-                <td class="capitalize">${alias}</td>
-                <td>${description}</td>
-            </tr>
-            `
+			const row = document.createElement('tr')
+			row.innerHTML = `
+							<td><span class="w-12 inline-block">${emoji.emoji}</span><button class="btn btn-primary btn-sm"><i class="fa-solid fa-clipboard"></i></button></td>
+							<td class="capitalize">${alias}</td>
+							<td>${description}</td>
+							`
+			fragment.appendChild(row)
 		}
 	})
+
+	tbody.innerHTML = ''
+	tbody.appendChild(fragment)
 }
 
 const getAlias = (emoji) => {
