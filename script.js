@@ -2,6 +2,7 @@
 const tbody = document.getElementById('tbody')
 const input = document.getElementById('search')
 const category = document.getElementById('category')
+const copyBtn = document.getElementsByClassName('copy')
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,6 +16,14 @@ input.addEventListener('input', (e) => {
 category.addEventListener('change', (e) => {
 	renderRows(input.value, e.target.value)
 })
+
+const addClickEvent = () => {
+	Array.from(copyBtn).forEach((btn) => {
+		btn.addEventListener('click', (e) => {
+			copy(e.target.parentElement.parentElement.children[0].innerText)
+		})
+	})
+}
 
 // Functions
 const renderRows = (query = '', category = 'All') => {
@@ -35,7 +44,7 @@ const renderRows = (query = '', category = 'All') => {
 		) {
 			const row = document.createElement('tr')
 			row.innerHTML = `
-							<td><span class="w-12 inline-block">${emoji.emoji}</span><button class="btn btn-primary btn-sm"><i class="fa-solid fa-clipboard"></i></button></td>
+							<td><span class="w-12 inline-block">${emoji.emoji}</span><button class="btn btn-primary btn-sm copy"><i class="fa-solid fa-clipboard"></i></button></td>
 							<td class="capitalize">${alias}</td>
 							<td>${description}</td>
 							`
@@ -45,6 +54,7 @@ const renderRows = (query = '', category = 'All') => {
 
 	tbody.innerHTML = ''
 	tbody.appendChild(fragment)
+	addClickEvent()
 }
 
 const getAlias = (emoji) => {
@@ -61,4 +71,8 @@ const getDescription = (emoji) => {
 		emoji.description.charAt(0).toUpperCase() + emoji.description.slice(1)
 
 	return description
+}
+
+const copy = (emoji) => {
+	navigator.clipboard.writeText(emoji)
 }
