@@ -82,10 +82,20 @@
 						<th>Description</th>
 					</tr>
 				</thead>
-				<tbody class="text-xl" id="tbody"></tbody>
+				<tbody class="text-xl" id="tbody">
+					<!-- Mockup -->
+					<td>
+						<span class="inline-block w-12">${emoji.emoji}</span>
+						<div class="tooltip" data-tip="Copy">
+							<button class="btn btn-primary btn-sm copy">
+								<i class="fa-solid fa-clipboard"></i>
+							</button>
+						</div>
+					</td>
+					<td class="capitalize">${alias}</td>
+					<td>${description}</td>
+				</tbody>
 			</table>
 		</main>
-		<div class="hidden w-12 capitalize btn btn-primary btn-sm"></div>
-		<div class="inline-block"></div>
 	</body>
 </html>

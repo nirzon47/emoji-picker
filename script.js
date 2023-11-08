@@ -3,6 +3,17 @@ const tbody = document.getElementById('tbody')
 const input = document.getElementById('search')
 const category = document.getElementById('category')
 const copyBtn = document.getElementsByClassName('copy')
+const themeToggle = document.getElementById('theme')
+
+const prefers = window.matchMedia('(prefers-color-scheme: dark)').matches
+	? 'dark'
+	: 'light'
+const theme = localStorage.getItem('theme') || prefers
+
+if (theme === 'light') {
+	theme.checked = true
+	document.documentElement.setAttribute('data-theme', 'light')
+}
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
@@ -25,6 +36,10 @@ const addClickEvent = () => {
 	})
 }
 
+themeToggle.addEventListener('click', () => {
+	changeTheme()
+})
+
 // Functions
 const renderRows = (query = '', category = 'All') => {
 	const fragment = document.createDocumentFragment()
@@ -44,7 +59,14 @@ const renderRows = (query = '', category = 'All') => {
 		) {
 			const row = document.createElement('tr')
 			row.innerHTML = `
-							<td><span class="w-12 inline-block">${emoji.emoji}</span><button class="btn btn-primary btn-sm copy"><i class="fa-solid fa-clipboard"></i></button></td>
+							<td>
+								<span class="w-12 inline-block">${emoji.emoji}</span>
+								<div class="tooltip" data-tip="Copy">
+									<button class="btn btn-primary btn-sm copy">
+										<i class="fa-solid fa-clipboard"></i>
+									</button>
+								</div>
+							</td>
 							<td class="capitalize">${alias}</td>
 							<td>${description}</td>
 							`
@@ -75,4 +97,16 @@ const getDescription = (emoji) => {
 
 const copy = (emoji) => {
 	navigator.clipboard.writeText(emoji)
+}
+
+const changeTheme = () => {
+	const html = document.documentElement.getAttribute('data-theme')
+
+	if (html === 'light') {
+		document.documentElement.setAttribute('data-theme', 'dark')
+		localStorage.setItem('theme', 'dark')
+	} else {
+		document.documentElement.setAttribute('data-theme', 'light')
+		localStorage.setItem('theme', 'light')
+	}
 }
