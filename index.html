@@ -8,6 +8,12 @@
 		<!-- Tailwind -->
 		<link rel="stylesheet" href="styles/output.css" />
 
+		<!-- AOS CSS -->
+		<link href="node_modules/aos/dist/aos.css" rel="stylesheet" />
+
+		<!-- AOS Script -->
+		<script src="node_modules/aos/dist/aos.js" defer></script>
+
 		<!-- Script -->
 		<script src="model.js"></script>
 		<script src="script.js" defer></script>
@@ -69,13 +75,17 @@
 		</header>
 
 		<main>
+			<!-- Inputs -->
 			<section class="flex mb-8 gap-x-8">
+				<!-- Search -->
 				<input
 					type="text"
 					placeholder="Search your emoji here"
 					class="w-full input input-bordered"
 					id="search"
 				/>
+
+				<!-- Category -->
 				<select class="w-full max-w-xs select select-bordered" id="category">
 					<option>All</option>
 					<option selected>Smileys & Emotion</option>
@@ -89,7 +99,10 @@
 					<option>Flags</option>
 				</select>
 			</section>
+
+			<!-- Table -->
 			<table class="table">
+				<!-- Table head -->
 				<thead class="text-base">
 					<tr>
 						<th>Name</th>
@@ -97,18 +110,10 @@
 						<th>Description</th>
 					</tr>
 				</thead>
-				<tbody class="text-xl" id="tbody">
-					<!-- Mockup -->
-					<td>
-						<span class="inline-block w-12">${emoji.emoji}</span>
-						<div class="tooltip" data-tip="Copy">
-							<button class="btn btn-primary btn-sm copy">
-								<i class="fa-solid fa-clipboard"></i>
-							</button>
-						</div>
-					</td>
-					<td class="capitalize">${alias}</td>
-					<td>${description}</td>
+
+				<!-- Table body -->
+				<tbody class="text-xl duration-200" id="tbody">
+					<!-- Data is rendered here -->
 				</tbody>
 			</table>
 		</main>

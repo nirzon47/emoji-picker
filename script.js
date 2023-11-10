@@ -1,3 +1,10 @@
+// AOS init
+AOS.init({
+	once: true,
+	duration: 1000,
+	offset: -700,
+})
+
 // DOM elements
 const tbody = document.getElementById('tbody')
 const input = document.getElementById('search')
@@ -41,6 +48,14 @@ themeToggle.addEventListener('click', () => {
 })
 
 // Functions
+
+/**
+ * Renders the rows of emojis based on the given query and category.
+ *
+ * @param {string} query - The query string to filter the emojis.
+ * @param {string} category - The category of emojis to filter.
+ * @return {void} This function does not return anything.
+ */
 const renderRows = (query = '', category = 'Smileys & Emotion') => {
 	const fragment = document.createDocumentFragment()
 
@@ -70,15 +85,24 @@ const renderRows = (query = '', category = 'Smileys & Emotion') => {
 							<td class="capitalize">${alias}</td>
 							<td>${description}</td>
 							`
+			row.setAttribute('data-aos', 'fade-right')
+
 			fragment.appendChild(row)
 		}
 	})
 
 	tbody.innerHTML = ''
 	tbody.appendChild(fragment)
+
 	addClickEvent()
 }
 
+/**
+ * Returns the alias of the given emoji.
+ *
+ * @param {string} emoji - The emoji for which to retrieve the alias.
+ * @return {string} The alias of the emoji.
+ */
 const getAlias = (emoji) => {
 	const alias = emoji.aliases
 		.toString()
@@ -88,6 +112,12 @@ const getAlias = (emoji) => {
 	return alias
 }
 
+/**
+ * Returns the capitalized description of an emoji.
+ *
+ * @param {string} emoji - The emoji to get the description for.
+ * @return {string} The capitalized description of the emoji.
+ */
 const getDescription = (emoji) => {
 	const description =
 		emoji.description.charAt(0).toUpperCase() + emoji.description.slice(1)
@@ -95,10 +125,22 @@ const getDescription = (emoji) => {
 	return description
 }
 
+/**
+ * Copies the given emoji to the clipboard.
+ *
+ * @param {string} emoji - The emoji to be copied.
+ * @return {undefined} This function does not return a value.
+ */
 const copy = (emoji) => {
 	navigator.clipboard.writeText(emoji)
 }
 
+/**
+ * Toggles the theme of the web page between light and dark.
+ *
+ * @param {none} - No parameters.
+ * @return {none} - No return value.
+ */
 const changeTheme = () => {
 	const html = document.documentElement.getAttribute('data-theme')
 
